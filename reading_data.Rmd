@@ -116,7 +116,7 @@ water_df =
 ```
 
 
-## BRFSS data
+## get BRFSS data
 
 ```{r}
 brfss_2010 = 
@@ -125,3 +125,20 @@ brfss_2010 =
   content("parsed")
 ```
 
+
+## get Pokemon data
+
+not a nice one
+```{r}
+pokemon_df = 
+  GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+
+pokemon_df$name
+pokemon_df$height
+pokemon_df$abilities
+```
+
+
+
+one markdown file for access data; another one for any other analysis to the processed data; avoiding go to internet accessing data every time

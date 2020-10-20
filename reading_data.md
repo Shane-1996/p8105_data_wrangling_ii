@@ -153,7 +153,7 @@ water_df =
   as_tibble( )
 ```
 
-## BRFSS data
+## get BRFSS data
 
 ``` r
 brfss_2010 = 
@@ -175,3 +175,61 @@ brfss_2010 =
     ## )
 
     ## See spec(...) for full column specifications.
+
+## get Pokemon data
+
+not a nice one
+
+``` r
+pokemon_df = 
+  GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+
+pokemon_df$name
+```
+
+    ## [1] "bulbasaur"
+
+``` r
+pokemon_df$height
+```
+
+    ## [1] 7
+
+``` r
+pokemon_df$abilities
+```
+
+    ## [[1]]
+    ## [[1]]$ability
+    ## [[1]]$ability$name
+    ## [1] "overgrow"
+    ## 
+    ## [[1]]$ability$url
+    ## [1] "https://pokeapi.co/api/v2/ability/65/"
+    ## 
+    ## 
+    ## [[1]]$is_hidden
+    ## [1] FALSE
+    ## 
+    ## [[1]]$slot
+    ## [1] 1
+    ## 
+    ## 
+    ## [[2]]
+    ## [[2]]$ability
+    ## [[2]]$ability$name
+    ## [1] "chlorophyll"
+    ## 
+    ## [[2]]$ability$url
+    ## [1] "https://pokeapi.co/api/v2/ability/34/"
+    ## 
+    ## 
+    ## [[2]]$is_hidden
+    ## [1] TRUE
+    ## 
+    ## [[2]]$slot
+    ## [1] 3
+
+one markdown file for access data; another one for any other analysis to
+the processed data; avoiding go to internet accessing data every time
