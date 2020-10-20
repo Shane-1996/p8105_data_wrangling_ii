@@ -61,7 +61,6 @@ tbl_maj =
 
 ## star war info
 
-
 data from "https://www.imdb.com/list/ls070150896/"
 
 ```{r}
@@ -71,7 +70,6 @@ sw_html = read_html(sw_url)
 
 sw_html
 ```
-
 
 get elements using CSS Selector (from web page), build data
 
@@ -115,5 +113,15 @@ water_df =
   content("text") %>% 
   jsonlite::fromJSON() %>% 
   as_tibble( )
+```
+
+
+## BRFSS data
+
+```{r}
+brfss_2010 = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+      query = list("$limit" = 5000)) %>% 
+  content("parsed")
 ```
 
