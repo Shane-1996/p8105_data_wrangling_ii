@@ -58,9 +58,9 @@ Get first table from this page
 ## read in the html
 
 ``` r
-url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
+drug_url = "http://samhda.s3-us-gov-west-1.amazonaws.com/s3fs-public/field-uploads/2k15StateFiles/NSDUHsaeShortTermCHG2015.htm"
 
-drug_use_html = read_html(url) 
+drug_use_html = read_html(drug_url) 
 
 drug_use_html
 ```
@@ -80,4 +80,49 @@ tbl_maj =
   html_table() %>% 
   slice(-1) %>% 
   as_tibble()
+```
+
+# Use CSS Selector
+
+## star war info
+
+data from “<https://www.imdb.com/list/ls070150896/>”
+
+``` r
+sw_url = "https://www.imdb.com/list/ls070150896/"
+
+sw_html = read_html(sw_url)
+
+sw_html
+```
+
+    ## {html_document}
+    ## <html xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+    ## [1] <head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
+    ## [2] <body id="styleguide-v2" class="fixed">\n            <img height="1" widt ...
+
+get elements using CSS Selector (from web page), build data
+
+``` r
+title_vec = 
+  sw_html %>% 
+  html_nodes(css = ".lister-item-header a") %>% 
+  html_text()
+
+gross_rev_vec = 
+  sw_html %>% 
+  html_nodes(css = ".text-muted .ghost~ .text-muted+ span") %>% 
+  html_text()
+
+runtime_vec = 
+  sw_html %>% 
+  html_nodes(css = ".runtime") %>% 
+  html_text()
+
+sw_df = 
+  tibble(
+    title = title_vec,
+    gross_rev = gross_rev_vec,
+    runtime = runtime_vec
+  )
 ```
